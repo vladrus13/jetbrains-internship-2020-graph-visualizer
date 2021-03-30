@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Position {
-    public final int skip;
-    public final Node node;
+    public int skip;
+    public Node node;
     public final Collection<Integer> childs;
+    public int size;
 
     public Position(int skip, Node node) {
         this.skip = skip;

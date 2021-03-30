@@ -1,0 +1,6 @@
+aa - a
+aaa - a
+a
+aaaa - a
+b - aa
+c - aa
