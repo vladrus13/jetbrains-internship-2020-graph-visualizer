@@ -126,7 +126,9 @@ mvn package exec:java "-Dexec.args=--cleverclassic --input=src/main/resources/ex
 
 --output=DIRECTORY - директория выхода, где будет создан файл с именем graph
 
---help - помощь
+--help - помощь.
+
+Если не указывать флаги вообще, то пройдет тестовая отрисовка всех примеров из папки примеров
 
 Немного примеров для запуска:
 
