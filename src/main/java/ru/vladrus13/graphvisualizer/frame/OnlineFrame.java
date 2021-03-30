@@ -11,17 +11,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+/**
+ * Frame to display image
+ */
 public class OnlineFrame extends Frame {
 
+    /**
+     * Image to display
+     */
     private final BufferedImage image;
 
     /**
      * Standard constructor for Frame
      *
-     * @param name   system name of frame
-     * @param start  start position for frame
-     * @param size   frame size
-     * @param parent parent frame
+     * @param name          system name of frame
+     * @param start         start position for frame
+     * @param size          frame size
+     * @param parent        parent frame
+     * @param bufferedImage image to display
      */
     public OnlineFrame(String name, Point start, Size size, Frame parent, BufferedImage bufferedImage) {
         super(name, start, size, parent);

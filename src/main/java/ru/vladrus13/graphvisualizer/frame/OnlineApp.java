@@ -10,11 +10,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+/**
+ * App to display visualization
+ */
 public class OnlineApp extends App {
+    /**
+     * @param width         width of app
+     * @param height        height of app
+     * @param bufferedImage image to display
+     */
     public OnlineApp(int width, int height, BufferedImage bufferedImage) {
         super(width, height);
         current = new OnlineFrame("Frame",
-                new Point(0,0, CoordinatesType.REAL),
+                new Point(0, 0, CoordinatesType.REAL),
                 new Size(width, height, CoordinatesType.REAL), null, bufferedImage);
         painter();
     }

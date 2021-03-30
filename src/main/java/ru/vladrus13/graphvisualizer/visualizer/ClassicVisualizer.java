@@ -1,29 +1,47 @@
 package ru.vladrus13.graphvisualizer.visualizer;
 
 import ru.vladrus13.graphvisualizer.graph.Graph;
-import ru.vladrus13.graphvisualizer.graph.Node;
 import ru.vladrus13.graphvisualizer.visualizer.pack.Packer;
 import ru.vladrus13.graphvisualizer.visualizer.pack.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * Usual visualizer of graph. Can be clever or not
+ */
 public class ClassicVisualizer implements Visualizer<BufferedImage> {
 
+    /**
+     * Is clever packing or not
+     */
     public final boolean isClever;
+    /**
+     * Square size on image
+     */
     public final static int SQUARE_SIZE = 50;
 
+    /**
+     * Constructor for class
+     *
+     * @param isClever is clever packing or not
+     */
     public ClassicVisualizer(boolean isClever) {
         this.isClever = isClever;
     }
 
+    /**
+     * Binary search for font size
+     *
+     * @param graphics graphics of picture
+     * @param str      text we want place to square
+     * @return size of font
+     */
     public double fontSize(Graphics graphics, String str) {
         double l = 0, r = SQUARE_SIZE, m;
         while (r - l > 1e-2) {

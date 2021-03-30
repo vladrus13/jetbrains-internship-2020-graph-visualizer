@@ -7,19 +7,30 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
+/**
+ * Class reading graph from file
+ */
 public class GraphReader {
 
+    /**
+     * Logger
+     */
     private final static Logger logger = Logger.getLogger(GraphReader.class.getName());
 
+    /**
+     * Read graph from file. File contain some lines. In one line one edge. One edge - two names splitting by "-"
+     *
+     * @param path path to file, absolute or relative
+     * @return graph
+     */
     public static Graph readGraph(Path path) {
         Graph graph = new Graph();
         try (BufferedReader bufferedReader = Files.newBufferedReader(path)) {
             bufferedReader.lines().forEach(line -> {
                 String[] nodes = line.split("-");
                 if (nodes.length == 1) {
-                    graph.setParent(nodes[0].trim());
+                    graph.setRoot(nodes[0].trim());
                 } else {
                     if (nodes.length != 2) {
                         logger.warning("Problem in line: " + line + ". Wrong edge. It can be only one \"-\" in one line");

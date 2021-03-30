@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -25,9 +24,27 @@ import java.util.stream.Stream;
  **/
 public class Launcher {
 
+    /**
+     * Logger for main class
+     */
     public static final Logger logger = Logger.getLogger(Launcher.class.getName());
+    /**
+     * Resources path for test variant
+     */
     public static final Path resources = Path.of("src").resolve("main").resolve("resources").resolve("examples");
 
+    /**
+     * Launcher for app
+     * Usage: mvn package parameters from root folder or java -jar name.jar parameters
+     * Parameters:
+     * --online - Online drawing
+     * --graphviz, --cleverclassic, --classic, --ascii - visualizations
+     * --input=PATH - input path to file
+     * --output=DIRECTORY - output path
+     *
+     * @param args arguments
+     * @throws IOException if we have problem with reading from or writing to file system
+     */
     public static void main(String[] args) throws IOException {
         if (args == null || args.length == 0) {
             logger.info("Start tests...");
@@ -72,12 +89,24 @@ public class Launcher {
                     output = Path.of(arg.substring(9));
                 }
                 switch (arg) {
-                    case "--online": online = true; break;
-                    case "--graphviz": visualizer = new GraphVizVisualizer(); break;
-                    case "--cleverclassic": visualizer = new ClassicVisualizer(true); break;
-                    case "--classic": visualizer = new ClassicVisualizer(false); break;
-                    case "--ascii": visualizer = new ASCIIVisualizer(); break;
-                    case "--help": help = true; break;
+                    case "--online":
+                        online = true;
+                        break;
+                    case "--graphviz":
+                        visualizer = new GraphVizVisualizer();
+                        break;
+                    case "--cleverclassic":
+                        visualizer = new ClassicVisualizer(true);
+                        break;
+                    case "--classic":
+                        visualizer = new ClassicVisualizer(false);
+                        break;
+                    case "--ascii":
+                        visualizer = new ASCIIVisualizer();
+                        break;
+                    case "--help":
+                        help = true;
+                        break;
                 }
             }
             if (help) {
@@ -105,7 +134,7 @@ public class Launcher {
                 if (visualizer instanceof GraphVizVisualizer ||
                         visualizer instanceof ClassicVisualizer) {
                     BufferedImage bufferedImage = (BufferedImage) visualizer.getImage(graph);
-                    OnlineApp onlineApp = new OnlineApp(800, 800, bufferedImage);
+                    new OnlineApp(800, 800, bufferedImage);
                 } else {
                     logger.info("Can't draw online this type of visualization");
                 }

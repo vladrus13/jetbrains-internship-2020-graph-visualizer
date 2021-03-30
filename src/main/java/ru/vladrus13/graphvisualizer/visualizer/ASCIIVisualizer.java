@@ -2,19 +2,30 @@ package ru.vladrus13.graphvisualizer.visualizer;
 
 import ru.vladrus13.graphvisualizer.graph.Graph;
 import ru.vladrus13.graphvisualizer.graph.Node;
-import ru.vladrus13.graphvisualizer.visualizer.pack.Packer;
-import ru.vladrus13.graphvisualizer.visualizer.pack.Position;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
+/**
+ * Visualize a graph with symbols like:
+ * {@code |-----a----|
+ * |--b-||--c-|
+ * |d||e||f||g|}
+ */
 public class ASCIIVisualizer implements Visualizer<String> {
 
+    /**
+     * Recursive fill a lines of graph
+     *
+     * @param lines container of lines
+     * @param node  current node
+     * @param level current distance from root
+     * @param start start position for this node
+     * @return size of this node in ASCII
+     */
     private int fill(ArrayList<StringBuilder> lines, Node node, int level, int start) {
         if (level + 1 > lines.size()) {
             lines.add(new StringBuilder());

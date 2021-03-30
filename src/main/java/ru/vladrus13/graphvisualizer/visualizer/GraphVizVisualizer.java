@@ -3,18 +3,26 @@ package ru.vladrus13.graphvisualizer.visualizer;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableNode;
-import guru.nidi.graphviz.model.Node;
 import ru.vladrus13.graphvisualizer.graph.Graph;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import static guru.nidi.graphviz.model.Factory.*;
+import static guru.nidi.graphviz.model.Factory.graph;
+import static guru.nidi.graphviz.model.Factory.mutNode;
 
+/**
+ * Graphviz lib realization of visualization of graph
+ */
 public class GraphVizVisualizer implements Visualizer<BufferedImage> {
 
+    /**
+     * Recursive getter of node
+     *
+     * @param node node on graph standard
+     * @return node on GraphViz lib standard
+     */
     public MutableNode getNode(ru.vladrus13.graphvisualizer.graph.Node node) {
         MutableNode returned = mutNode(node.getName());
         for (ru.vladrus13.graphvisualizer.graph.Node child : node.getChilds()) {

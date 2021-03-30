@@ -5,14 +5,38 @@ import ru.vladrus13.graphvisualizer.graph.Node;
 
 import java.util.ArrayList;
 
+/**
+ * Pack graph to table
+ */
 public class Packer {
 
+    /**
+     * Packing graph
+     */
     private final Graph graph;
+    /**
+     * Pack
+     */
     private ArrayList<ArrayList<Position>> pack;
+    /**
+     * First not null position of every line of tree
+     */
     private ArrayList<Integer> firstNotNullPosition;
+    /**
+     * Is packing clever
+     */
     private final boolean isClever;
+    /**
+     * Max width of pack
+     */
     private int maxWidth = 0;
 
+    /**
+     * Container for Packer class
+     *
+     * @param graph    ready graph
+     * @param isClever is clever packing or not
+     */
     public Packer(final Graph graph, final boolean isClever) {
         this.graph = graph;
         this.pack = null;
@@ -20,6 +44,14 @@ public class Packer {
         this.isClever = isClever;
     }
 
+    /**
+     * Recursive function of packing
+     *
+     * @param level    level of DFS
+     * @param position position on level
+     * @param node     node of graph
+     * @return if clever pack: size, else: left position, of node
+     */
     private int pack(final int level, int position, final Node node) {
         if (pack.size() < level + 1) {
             pack.add(new ArrayList<>());
@@ -38,7 +70,6 @@ public class Packer {
                 position1.addChild(pack(level + 1, 0, child));
             }
             maxWidth = Math.max(maxWidth, position + 1);
-            position1.size = position;
             return position;
         } else {
             Position us = new Position(0, node);
@@ -62,21 +93,33 @@ public class Packer {
             size = Math.max(1, size);
             firstNotNullPosition.set(level, position + size);
             maxWidth = Math.max(maxWidth, size);
-            us.size = size;
             return size;
         }
     }
 
+    /**
+     * Run packing
+     */
     public void run() {
         pack = new ArrayList<>();
         firstNotNullPosition = new ArrayList<>();
         pack(0, 0, graph.getRoot());
     }
 
+    /**
+     * Getting pack of graph
+     *
+     * @return pack of the graph
+     */
     public ArrayList<ArrayList<Position>> getPack() {
         return pack;
     }
 
+    /**
+     * Get max width of graph
+     *
+     * @return max width of graph
+     */
     public int getMaxWidth() {
         return maxWidth;
     }
